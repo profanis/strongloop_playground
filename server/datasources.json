@@ -1,0 +1,18 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongo": {
+    "host": "127.0.0.1",
+    "database": "mean-dev",
+    "name": "mongo",
+    "connector": "mongodb",
+    "debug": true,
+    "server": {
+      "auto_reconnect": true,
+      "reconnectTries": 100,
+      "reconnectInterval": 1000
+    }
+  }
+}
