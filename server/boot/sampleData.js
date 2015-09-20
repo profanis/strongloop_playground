@@ -2,6 +2,7 @@ var async = require("async");
 module.exports = function (server) {
   var mongoDs = server.dataSources.mongo;
 
+  createCountries();
   createUsers();
 
   async.parallel({
@@ -19,7 +20,7 @@ module.exports = function (server) {
         return cb(err);
       }
       var Supplier = server.models.supplier;
- 
+
       Supplier.create([
         { "name": "Fanis", "address": "test Fani's address", "email": "fanis@test.com" },
         { "name": "Tania", "address": "test Tania's", "email": "tania@test.com" },
@@ -31,13 +32,27 @@ module.exports = function (server) {
   function createUsers() {
     var User = server.models.User;
 
-    User.create({ email: "prodromouf@gmail.com", password: "qqq111" }, function (err, user) {
+    User.create({ email: "testuser@gmail.com", password: "qqq111" }, function (err, user) {
       if (err) throw err;
 
-      User.login({ email: 'prodromouf@gmail.com', password: 'qqq111' }, function (err, accessToken) {
-        if(err) console.log(err);
-        
+      User.login({ email: 'testuser@gmail.com', password: 'qqq111' }, function (err, accessToken) {
+        if (err) console.log(err);
+
         console.log(accessToken);
+      });
+    });
+  }
+
+  function createCountries() {
+
+    mongoDs.automigrate("country", function (err) {
+      if (err) {
+        console.log(err);
+      }
+
+      var Country = server.models.country;
+      Country.create({ name: "greece", code: "gr" }, function (err, country) {
+        if (err) throw err;
       });
     });
   }

@@ -39,5 +39,10 @@
   "store": {
     "dataSource": "mongo",
     "public": true
+  },
+  "country": {
+    "dataSource": "mongo",
+    "public": true
   }
+  
 }
