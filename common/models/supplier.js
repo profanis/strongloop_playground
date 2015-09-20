@@ -9,7 +9,7 @@ module.exports = function (Supplier) {
 	
 	var isStatic = true;
 	Supplier.disableRemoteMethod('find', isStatic);
-	Supplier.disableRemoteMethod('findById', isStatic);
+//	Supplier.disableRemoteMethod('findById', isStatic);
 		
 	Supplier.status = function (cb) {
 

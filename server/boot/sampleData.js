@@ -13,10 +13,13 @@ module.exports = function (server) {
 
   function createSuppliers(cb) {
 
-    mongoDs.automigrate("supplier", function (err) {
-      if (err) return cb(err);
+    mongoDs.autoupdate("supplier", function (err) {
+      if (err) {
+        console.log(err);
+        return cb(err);
+      }
       var Supplier = server.models.supplier;
-
+ 
       Supplier.create([
         { "name": "Fanis", "address": "test Fani's address", "email": "fanis@test.com" },
         { "name": "Tania", "address": "test Tania's", "email": "tania@test.com" },
