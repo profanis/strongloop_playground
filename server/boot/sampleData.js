@@ -1,4 +1,7 @@
 var async = require("async");
+var fs = require('fs');
+var csv = require('csv');
+
 module.exports = function (server) {
   var mongoDs = server.dataSources.mongo;
 
@@ -38,22 +41,29 @@ module.exports = function (server) {
       User.login({ email: 'testuser@gmail.com', password: 'qqq111' }, function (err, accessToken) {
         if (err) console.log(err);
 
-        console.log(accessToken);
+        //console.log(accessToken);
       });
     });
   }
 
   function createCountries() {
+    var readStream = fs.createReadStream(process.cwd() + '/resources/GeoPC_Countries.csv');
+    var parser = csv.parse({ columns: true, delimiter: ';' }, function (err, data) {
 
-    mongoDs.automigrate("country", function (err) {
-      if (err) {
-        console.log(err);
-      }
+      mongoDs.automigrate("country", function (err) {
+        if (err) {
+          console.log(err);
+        }
 
-      var Country = server.models.country;
-      Country.create({ name: "greece", code: "gr" }, function (err, country) {
-        if (err) throw err;
+        var Country = server.models.country;
+        data.forEach(function (countryItem) {
+          Country.create({ name: countryItem.country, code: countryItem.iso }, function (err, country) {
+            if (err) throw err;
+          });
+        });
+
       });
     });
+    readStream.pipe(parser);
   }
 };
