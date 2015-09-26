@@ -17,9 +17,10 @@ module.exports = function(server) {
         var parser = csv.parse(csvOptions, parseCallBack);
         readStream.pipe(parser);
 
-        function createCountriesFromCsv(csvData, model) {
+        function createCountriesFromCsv(csvData) {
+            var Country = server.models.country;
             csvData.forEach(function(countryItem) {
-                model.create({
+                Country.create({
                     name: countryItem.country,
                     code: countryItem.iso
                 }, function(err, country) {
@@ -35,7 +36,7 @@ module.exports = function(server) {
                 if (err) {
                     console.log(err);
                 }
-                createCountriesFromCsv(csvData, server.models.country);
+                createCountriesFromCsv(csvData);
 
             });
         }
