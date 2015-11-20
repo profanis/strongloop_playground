@@ -32,17 +32,20 @@
     "dataSource": "db",
     "public": false
   },
-  "supplier": {
+  "Supplier": {
     "dataSource": "mongo",
     "public": true
   },
-  "store": {
+  "Store": {
     "dataSource": "mongo",
     "public": true
   },
-  "country": {
+  "Country": {
+    "dataSource": "mongo",
+    "public": true
+  },
+  "Region": {
     "dataSource": "mongo",
     "public": true
   }
-  
 }

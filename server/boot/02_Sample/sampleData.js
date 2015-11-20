@@ -14,12 +14,12 @@ module.exports = function(server) {
 
     function createSuppliers(cb) {
 
-        mongoDs.autoupdate("supplier", function(err) {
+        mongoDs.autoupdate("Supplier", function(err) {
             if (err) {
                 console.log(err);
                 return cb(err);
             }
-            var Supplier = server.models.supplier;
+            var Supplier = server.models.Supplier;
 
             Supplier.create([{
                 "name": "Fanis",

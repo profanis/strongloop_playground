@@ -1,5 +1,5 @@
 {
-  "name": "Country",
+  "name": "Region",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
@@ -12,17 +12,17 @@
     },
     "code": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "path": {
+      "type": "string"
+    },
+    "pathIds": {
+      "type": "string"
     }
   },
   "validations": [],
-  "relations": {
-    "regions": {
-      "type": "hasMany",
-      "model": "Region",
-      "foreignKey": "country_id"
-    }
-  },
+  "relations": {},
   "acls": [],
   "methods": {}
 }

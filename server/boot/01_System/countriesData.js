@@ -18,7 +18,7 @@ module.exports = function(server) {
         readStream.pipe(parser);
 
         function createCountriesFromCsv(csvData) {
-            var Country = server.models.country;
+            var Country = server.models.Country;
             csvData.forEach(function(countryItem) {
                 Country.create({
                     name: countryItem.country,
@@ -31,7 +31,7 @@ module.exports = function(server) {
 
         function parseCallBack(err, csvData) {
 
-            mongoDs.autoupdate("country", function(err) {
+            mongoDs.autoupdate("Country", function(err) {
 
                 if (err) {
                     console.log(err);
